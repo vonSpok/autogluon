@@ -590,7 +590,7 @@ class NNFastAiTabularModel(AbstractModel):
         return num_cpus, num_gpus
 
     def __get_metrics_map(self):
-        from fastai.metrics import FBeta, Precision, R2Score, Recall, RocAucBinary, accuracy, mae, mse, rmse
+        from fastai.metrics import FBeta, Precision, R2Score, Recall, RocAucBinary, MatthewsCorrCoef, accuracy, mae, mse, rmse
 
         from .fastai_helpers import medae
         from .quantile_helpers import HuberPinballLoss
@@ -618,6 +618,7 @@ class NNFastAiTabularModel(AbstractModel):
             "recall_micro": Recall(average="micro"),
             "recall_weighted": Recall(average="weighted"),
             "log_loss": None,
+            "mcc": MatthewsCorrCoef(),
             "pinball_loss": HuberPinballLoss(quantile_levels=self.quantile_levels),
             # Not supported: pac_score
         }
